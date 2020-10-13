@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NgModel } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +8,18 @@ import { NgModel } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  obj: {id?: number, name?: string} = {};
+  user: { id?: number, name?: string } = {};
 
-  checkInputState(id: NgModel, name: NgModel): void {
-    console.log(id);
-    console.log(name);
+  constructor(private userService: UserService) {
+
+  }
+
+  async checkInputState(id: NgModel, name: NgModel, myForm: NgForm): Promise<void> {
+    // console.log(id);
+    // console.log(name);
+    console.log(myForm.value);
+    const result = await this.userService.getAllFilteredUsers(myForm.value.id, myForm.value.name).then();
+    console.log(result);
+
   }
 }

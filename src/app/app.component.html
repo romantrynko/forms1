@@ -1,4 +1,21 @@
-<input [(ngModel)]="obj.id" #id="ngModel" required>
-<input [(ngModel)]="obj.name" #name="ngModel" required>
+<!-- <div>
+  <input type="number" [(ngModel)]="obj.id" #id="ngModel" required>
+  <div *ngIf="id.valid" >fill id input</div>
+</div>
+<div>
+  <input [(ngModel)]="obj.name" #name="ngModel" required>
+  <div *ngIf="name.touched" >touched name input</div>
+</div>
+<button (click)="checkInputState(id, name)" [disabled]="id.invalid && name.invalid">Check</button> -->
 
-<button (click)="checkInputState(id, name)">Check</button>
+<form #myForm="ngForm">
+  <div>
+    <input type="number" [(ngModel)]="user.id" #id="ngModel" required name="id">
+    <div *ngIf="id.valid" >fill id input</div>
+  </div>
+  <div>
+    <input [(ngModel)]="user.name" #name="ngModel" required name="name">
+    <div *ngIf="name.valid" >fill name input</div>
+  </div>
+  <button (click)="checkInputState(id, name, myForm)" [disabled]="myForm.invalid">Check</button>
+</form>
